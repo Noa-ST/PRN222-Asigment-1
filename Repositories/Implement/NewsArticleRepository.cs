@@ -89,6 +89,15 @@ namespace Repositories.Implement
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<NewsArticle>> GetActiveArticlesAsync()
+        {
+            return await _context.NewsArticles
+                .Include(n => n.Category)
+                .Where(n => n.NewsStatus == 1)
+                .ToListAsync();
+        }
+
     }
 
 }

@@ -51,6 +51,4 @@ namespace NewsManagementSystemMVC.Controllers
             return RedirectToAction("Login");
         }
     }
-
-
 }

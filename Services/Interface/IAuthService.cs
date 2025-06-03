@@ -11,5 +11,4 @@ namespace Services.Interface
     {
         SystemAccount Authenticate(string email, string password);
     }
-
 }

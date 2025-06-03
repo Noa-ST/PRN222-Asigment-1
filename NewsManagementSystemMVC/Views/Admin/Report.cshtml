@@ -1,0 +1,25 @@
+﻿@model BusinessObjects.DTOs.AdminReportDto
+
+<h2>Báo cáo quản trị</h2>
+
+<p><strong>Tổng số bài viết:</strong> @Model.TotalArticles</p>
+<p><strong>Tổng số người dùng:</strong> @Model.TotalUsers</p>
+
+<h4>Số bài viết theo Category</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Số bài viết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ArticlesByCategory)
+        {
+            <tr>
+                <td>@item.CategoryName</td>
+                <td>@item.ArticleCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

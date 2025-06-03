@@ -1,0 +1,23 @@
+﻿@model List<BusinessObjects.Entities.NewsArticle>
+
+<h2>Danh sách bài viết đang hoạt động</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Danh mục</th>
+            <th>Ngày tạo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model)
+        {
+            <tr>
+                <td>@article.Title</td>
+                <td>@article.Category?.Name</td>
+                <td>@article.CreatedDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

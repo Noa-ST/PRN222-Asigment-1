@@ -1,5 +1,6 @@
 ﻿
 using BusinessObjects.DTOs;
+using BusinessObjects.Entities;
 
 namespace Repositories.Interface
 {
@@ -10,5 +11,6 @@ namespace Repositories.Interface
         Task CreateAsync(CreateNewsArticleDto dto);
         Task UpdateAsync(UpdateNewsArticleDto dto);
         Task DeleteAsync(int id);
+        Task<List<NewsArticle>> GetActiveArticlesAsync();
     }
 }

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using NewsManagementSystemMVC.Filters;
 using NewsManagementSystemMVC.Models;
 using System.Diagnostics;
 
 namespace NewsManagementSystemMVC.Controllers
 {
+    [AuthorizeUser]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

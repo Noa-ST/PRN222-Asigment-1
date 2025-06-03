@@ -23,9 +23,14 @@ namespace Repositories.Implement
 
         public async Task DeleteAsync(Category category)
         {
+            var canDelete = !await _context.NewsArticles.AnyAsync(a => a.CategoryID == category.ID);
+            if (!canDelete)
+                throw new InvalidOperationException("Không thể xóa category vì đang được sử dụng trong bài viết.");
+
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
         }
+
 
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
@@ -52,6 +57,11 @@ namespace Repositories.Implement
         public async Task<bool> IsNameExistsAsync(string name)
         {
             return await _context.Categories.AnyAsync(c => c.Name == name);
+        }
+
+        public async Task<bool> CanDeleteCategory(int categoryId)
+        {
+            return !await _context.NewsArticles.AnyAsync(a => a.CategoryID == categoryId);
         }
     }
 

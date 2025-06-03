@@ -15,6 +15,7 @@ namespace Repositories.Interface
         Task UpdateAsync(Category category);
         Task DeleteAsync(Category category);
         Task<bool> IsNameExistsAsync(string name);
+        Task<bool> CanDeleteCategory(int categoryId);
     }
 
 }

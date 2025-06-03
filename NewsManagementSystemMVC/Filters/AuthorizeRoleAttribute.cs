@@ -1,28 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace NewsManagementSystemMVC.Filters
 {
-    public class AuthorizeRoleAttribute : ActionFilterAttribute
+    public class AuthorizeUserAttribute : ActionFilterAttribute
     {
         private readonly string[] _roles;
 
-        public AuthorizeRoleAttribute(params string[] roles)
+        public AuthorizeUserAttribute(params string[] roles)
         {
             _roles = roles;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var role = context.HttpContext.Session.GetString("UserRole");
-
-            if (string.IsNullOrEmpty(role) || !_roles.Contains(role))
+            var email = context.HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email))
             {
-                context.Result = new RedirectToActionResult("Login", "Account", null);
+                context.Result = new RedirectToActionResult("Login", "Login", null);
             }
 
             base.OnActionExecuting(context);
         }
     }
-
 }

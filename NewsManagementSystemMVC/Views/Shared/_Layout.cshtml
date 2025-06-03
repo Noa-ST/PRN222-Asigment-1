@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var userEmail = Context.Session.GetString("UserEmail");
+    var userFullName = Context.Session.GetString("UserFullName");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,7 +39,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Tag</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Report">Report</a>
+                        </li>
+
                     </ul>
+                    <ul class="navbar-nav">
+                        @if (!string.IsNullOrEmpty(userEmail))
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link">Xin chào, <strong>@userFullName</strong></span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" asp-controller="Login" asp-action="Logout">Đăng xuất</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Login" asp-action="Login">Đăng nhập</a>
+                            </li>
+                        }
+                    </ul>
+
                 </div>
             </div>
         </nav>

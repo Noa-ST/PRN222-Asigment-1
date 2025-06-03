@@ -13,10 +13,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FUNewsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FUNewsDb")));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddScoped<INewsArticleRepository, NewsArticleRepository>(); 
 builder.Services.AddScoped<INewsArticleService, NewsArticleService>();
+
 builder.Services.AddScoped<ITaqRepository, TaqRepository>();
 builder.Services.AddScoped<ITaqService, TaqService>();
+
+builder.Services.AddScoped<IAdminReportRepository, AdminReportRepository>();
+builder.Services.AddScoped<IAdminReportService, AdminReportService>();
 
 builder.Services.AddScoped<ISystemAccountRepository, SystemAccountRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();

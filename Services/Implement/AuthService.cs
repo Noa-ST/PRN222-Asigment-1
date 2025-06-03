@@ -23,13 +23,19 @@ namespace Services.Implement
 
         public SystemAccount Authenticate(string email, string password)
         {
-            // 1. Kiểm tra xem có phải Admin mặc định trong appsettings không
+            // Lấy từ appsettings
             var adminEmail = _configuration["AdminAccount:Email"];
             var adminPassword = _configuration["AdminAccount:Password"];
 
+            var lecturerEmail = _configuration["LecturerAccount:Email"];
+            var lecturerPassword = _configuration["LecturerAccount:Password"];
+
+            var staffEmail = _configuration["StaffAccount:Email"];
+            var staffPassword = _configuration["StaffAccount:Password"];
+
+            // 1. Admin
             if (email == adminEmail && password == adminPassword)
             {
-                // Tạo admin giả
                 return new SystemAccount
                 {
                     Email = adminEmail,
@@ -38,13 +44,35 @@ namespace Services.Implement
                 };
             }
 
-            // 2. Nếu không phải admin mặc định, kiểm tra trong DB
+            // 2. Lecturer
+            if (email == lecturerEmail && password == lecturerPassword)
+            {
+                return new SystemAccount
+                {
+                    Email = lecturerEmail,
+                    Role = "Lecturer",
+                    FullName = "Default Lecturer"
+                };
+            }
+
+            // 3. Staff
+            if (email == staffEmail && password == staffPassword)
+            {
+                return new SystemAccount
+                {
+                    Email = staffEmail,
+                    Role = "Staff",
+                    FullName = "Default Staff"
+                };
+            }
+
+            // 4. Nếu không phải user mặc định => kiểm tra DB
             var account = _accountRepo.GetByEmail(email);
 
             if (account == null)
                 return null;
 
-            //mã hóa password & so sánh ở đây, tạm thời so sánh thuần
+            // So sánh password đơn giản (nên mã hóa thực tế)
             if (account.Password != password)
                 return null;
 

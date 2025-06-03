@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.Interface;
 using BusinessObjects.DTOs;
+using NewsManagementSystemMVC.Filters;
 
 namespace NewsManagementSystemMVC.Controllers
 {
+    [AuthorizeUser("Staff")]
     public class TagController : Controller
     {
         private readonly ITaqService _taqService;

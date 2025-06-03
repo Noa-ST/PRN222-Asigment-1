@@ -4,11 +4,13 @@ using DataAccessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NewsManagementSystemMVC.Filters;
 using Services.Interface;
 using System;
 
 namespace NewsManagementSystemMVC.Controllers
 {
+    [AuthorizeUser("Staff")]
     public class NewsArticleController : Controller
     {
         private readonly INewsArticleService _naService;
