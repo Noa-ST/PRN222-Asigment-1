@@ -1,0 +1,33 @@
+﻿@using BusinessObjects.Enums
+@model BusinessObjects.DTOs.UpdateNewsArticleDto
+@{
+    ViewData["Title"] = "Edit News Article";
+}
+
+<h2>Edit News Article</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ID" />
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryID">Category</label>
+        <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.Categories"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewsStatus">Status</label>
+        <select asp-for="NewsStatus" class="form-control" asp-items="Html.GetEnumSelectList<NewsStatus>()"></select>
+    </div>
+    <div class="form-group">
+        <label>Tags</label>
+        <select asp-for="TaqIDs" class="form-control" multiple asp-items="ViewBag.Taqs"></select>
+    </div>
+    <input type="hidden" asp-for="UpdatedByID" value="1" />
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

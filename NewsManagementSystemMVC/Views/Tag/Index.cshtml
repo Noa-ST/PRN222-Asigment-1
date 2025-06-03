@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BusinessObjects.DTOs.GetTaqDto>
+@{
+    ViewData["Title"] = "Tag List";
+}
+
+<h2 class="mb-4">Taq List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Create New Taq</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th style="width: 150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var taq in Model)
+        {
+            <tr>
+                <td>@taq.ID</td>
+                <td>@taq.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@taq.ID" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@taq.ID" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this tag?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

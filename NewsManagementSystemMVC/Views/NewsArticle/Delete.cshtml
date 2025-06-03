@@ -1,0 +1,18 @@
+﻿@model BusinessObjects.DTOs.GetNewsArticleDto
+@{
+    ViewData["Title"] = "Delete News Article";
+}
+
+<h2>Delete Article</h2>
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p>@Model.Content</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="ID" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

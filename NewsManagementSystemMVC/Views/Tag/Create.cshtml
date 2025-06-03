@@ -1,0 +1,21 @@
+﻿@model BusinessObjects.DTOs.CreateTaqDto
+@{
+    ViewData["Title"] = "Create Taq";
+}
+
+<h2>Create New Taq</h2>
+
+<form asp-action="Create" method="post" class="mt-3">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Create</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Back to List</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
