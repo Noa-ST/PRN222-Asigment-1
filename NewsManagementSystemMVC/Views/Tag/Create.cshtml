@@ -1,20 +1,29 @@
 ﻿@model BusinessObjects.DTOs.CreateTaqDto
+
 @{
-    ViewData["Title"] = "Create Taq";
+    ViewData["Title"] = "Tạo mới tag";
 }
 
-<h2>Create New Taq</h2>
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="text-center text-success mb-4">@ViewData["Title"]</h2>
 
-<form asp-action="Create" method="post" class="mt-3">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label">Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+    <form asp-action="Create" method="post" novalidate>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Tên Tag</label>
+            <input asp-for="Name" class="form-control" placeholder="Nhập tên tag" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-success mt-2">Create</button>
-    <a asp-action="Index" class="btn btn-secondary mt-2">Back to List</a>
-</form>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Quay lại
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Tạo mới
+            </button>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

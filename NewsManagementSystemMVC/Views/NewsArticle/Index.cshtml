@@ -1,51 +1,70 @@
 ﻿@model IEnumerable<BusinessObjects.DTOs.GetNewsArticleDto>
 @{
-    ViewData["Title"] = "News Articles";
+    ViewData["Title"] = "Bài viết tin tức";
 }
 
-<h2>News Articles</h2>
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">
+        <i class="fa-solid fa-newspaper"></i> Danh sách bài viết
+    </h2>
 
-<a asp-action="Create" class="btn btn-primary mb-2">Create New</a>
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> Thêm mới
+        </a>
+    </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Created</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-light">
             <tr>
-                <td>@item.Title</td>
-                <td>@item.CategoryName</td>
-                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                <td>@item.NewsStatus</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a>
-                </td>
+                <th>Tiêu đề</th>
+                <th>Danh mục</th>
+                <th>Ngày tạo</th>
+                <th>Trạng thái</th>
+                <th class="text-center">Thao tác</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<!-- Pagination -->
-@if (ViewBag.TotalPages != null && ViewBag.CurrentPage != null)
-{
-    <nav>
-        <ul class="pagination">
-            @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
-                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
-                </li>
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <span class="badge @(item.NewsStatus == 1 ? "bg-success" : "bg-secondary")">
+                            @item.NewsStatus
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-warning me-1">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
             }
-        </ul>
-    </nav>
-}
+        </tbody>
+    </table>
 
+    @* Pagination *@
+    @if (ViewBag.TotalPages != null && ViewBag.CurrentPage != null)
+    {
+        <nav>
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+}

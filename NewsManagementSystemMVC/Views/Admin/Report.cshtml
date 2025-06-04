@@ -1,25 +1,44 @@
 ﻿@model BusinessObjects.DTOs.AdminReportDto
 
-<h2>Báo cáo quản trị</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">Báo cáo quản trị</h2>
 
-<p><strong>Tổng số bài viết:</strong> @Model.TotalArticles</p>
-<p><strong>Tổng số người dùng:</strong> @Model.TotalUsers</p>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Tổng số bài viết</h5>
+                    <p class="display-4 text-success">@Model.TotalArticles</p>
+                </div>
+            </div>
+        </div>
 
-<h4>Số bài viết theo Category</h4>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Số bài viết</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ArticlesByCategory)
-        {
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Tổng số người dùng</h5>
+                    <p class="display-4 text-info">@Model.TotalUsers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Số bài viết theo Category</h4>
+    <table class="table table-striped table-bordered table-hover shadow-sm">
+        <thead class="table-primary">
             <tr>
-                <td>@item.CategoryName</td>
-                <td>@item.ArticleCount</td>
+                <th>Category</th>
+                <th class="text-center">Số bài viết</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ArticlesByCategory)
+            {
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td class="text-center fw-semibold">@item.ArticleCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

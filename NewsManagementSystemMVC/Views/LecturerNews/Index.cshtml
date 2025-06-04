@@ -1,23 +1,26 @@
 ﻿@model List<BusinessObjects.Entities.NewsArticle>
 
-<h2>Danh sách bài viết đang hoạt động</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">Danh sách bài viết đang hoạt động</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Tiêu đề</th>
-            <th>Danh mục</th>
-            <th>Ngày tạo</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var article in Model)
-        {
+    <table class="table table-striped table-hover table-bordered shadow-sm">
+        <thead class="table-dark">
             <tr>
-                <td>@article.Title</td>
-                <td>@article.Category?.Name</td>
-                <td>@article.CreatedDate.ToShortDateString()</td>
+                <th>Tiêu đề</th>
+                <th>Danh mục</th>
+                <th>Ngày tạo</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td class="fw-semibold">@article.Title</td>
+                    <td>@article.Category?.Name ?? "<i>Chưa có danh mục</i>"</td>
+                    <td>@article.CreatedDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

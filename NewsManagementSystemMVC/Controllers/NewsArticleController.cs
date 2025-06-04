@@ -68,6 +68,29 @@ namespace NewsManagementSystemMVC.Controllers
             return View(dto);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var article = await _naService.GetByIdAsync(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            var dto = new UpdateNewsArticleDto
+            {
+                ID = article.ID,
+                Title = article.Title,
+                Content = article.Content,
+                CategoryID = article.CategoryID,
+                NewsStatus = article.NewsStatus,
+                TaqIDs = article.Taqs.Select(t => t.ID).ToList()
+            };
+
+            await LoadSelectListsAsync();
+            return View(dto);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateNewsArticleDto dto)

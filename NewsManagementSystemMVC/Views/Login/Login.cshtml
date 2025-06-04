@@ -4,30 +4,32 @@
     ViewData["Title"] = "Đăng nhập";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
 
-<form asp-action="Login" method="post" class="form-horizontal">
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+    <form asp-action="Login" method="post" novalidate>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="Nhập email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Nhập mật khẩu" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Đăng nhập</button>
-    </div>
+        @if (ViewBag.LoginError != null)
+        {
+            <div class="alert alert-danger">@ViewBag.LoginError</div>
+        }
 
-    @if (ViewBag.LoginError != null)
-    {
-        <div class="alert alert-danger">@ViewBag.LoginError</div>
-    }
-</form>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

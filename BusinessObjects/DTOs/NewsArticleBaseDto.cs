@@ -19,7 +19,6 @@ namespace BusinessObjects.DTOs
         [Required]
         public int CreatedByID { get; set; }
         public List<int> TaqIDs { get; set; }
-
     }
 
     public class UpdateNewsArticleDto : NewsArticleBaseDto
