@@ -1,0 +1,44 @@
+﻿@model BusinessObjects.DTOs.GetSystemAccountDto
+
+@{
+    ViewData["Title"] = "Xóa tài khoản";
+    var hasDependencies = ViewBag.HasDependencies as bool? ?? false;
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">Xóa tài khoản</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">Họ tên</dt>
+        <dd class="col-sm-9">@Model.FullName</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Vai trò</dt>
+        <dd class="col-sm-9">@Model.Role</dd>
+    </dl>
+
+    @if (hasDependencies)
+    {
+        <div class="alert alert-warning">
+            <strong>Lưu ý:</strong> Tài khoản này có liên quan đến các bài viết đã tạo hoặc chỉnh sửa. Không thể xóa.
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    }
+    else
+    {
+        <form asp-action="DeleteConfirmed" method="post">
+            <input type="hidden" name="id" value="@Model.ID" />
+
+            <div class="alert alert-danger">
+                Bạn có chắc chắn muốn <strong>xóa</strong> tài khoản này không? Hành động này không thể hoàn tác!
+            </div>
+
+            <button type="submit" class="btn btn-danger">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+        </form>
+    }
+</div>

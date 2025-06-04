@@ -24,6 +24,9 @@ builder.Services.AddScoped<IAdminReportRepository, AdminReportRepository>();
 builder.Services.AddScoped<IAdminReportService, AdminReportService>();
 
 builder.Services.AddScoped<ISystemAccountRepository, SystemAccountRepository>();
+builder.Services.AddScoped<ISystemAccountService, SystemAccountService>();
+
+builder.Services.AddScoped<ISystemAccountRepository, SystemAccountRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 

@@ -8,8 +8,6 @@ namespace BusinessObjects.Enums
 {
     public enum NewsStatus
     {
-        Draft,
-        Published,
-        Archived
+        Inactive, Active
     }
 }

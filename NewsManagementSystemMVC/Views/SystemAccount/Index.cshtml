@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BusinessObjects.DTOs.GetSystemAccountDto>
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<h2 class="mb-4">Quản lý người dùng</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Thêm người dùng mới</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Họ và tên</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.Password</td>
+                <td>@user.Role</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.ID" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+                    <a asp-action="Delete" asp-route-id="@user.ID" class="btn btn-sm btn-danger">Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
