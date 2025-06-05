@@ -34,9 +34,21 @@ namespace NewsManagementSystemMVC.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var user = await _service.GetByIdAsync(id);
-            return View(user);
+            var getDto = await _service.GetByIdAsync(id);
+            if (getDto == null) return NotFound();
+
+            var updateDto = new UpdateSystemAccountDto
+            {
+                ID = getDto.ID,
+                FullName = getDto.FullName,
+                Email = getDto.Email,
+                Password = getDto.Password,
+                Role = getDto.Role
+            };
+
+            return View(updateDto); 
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateSystemAccountDto dto)

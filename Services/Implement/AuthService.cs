@@ -23,17 +23,10 @@ namespace Services.Implement
 
         public SystemAccount Authenticate(string email, string password)
         {
-            // Lấy từ appsettings
+            // Admin mặc định 
             var adminEmail = _configuration["AdminAccount:Email"];
             var adminPassword = _configuration["AdminAccount:Password"];
 
-            var lecturerEmail = _configuration["LecturerAccount:Email"];
-            var lecturerPassword = _configuration["LecturerAccount:Password"];
-
-            var staffEmail = _configuration["StaffAccount:Email"];
-            var staffPassword = _configuration["StaffAccount:Password"];
-
-            // 1. Admin
             if (email == adminEmail && password == adminPassword)
             {
                 return new SystemAccount
@@ -44,35 +37,12 @@ namespace Services.Implement
                 };
             }
 
-            // 2. Lecturer
-            if (email == lecturerEmail && password == lecturerPassword)
-            {
-                return new SystemAccount
-                {
-                    Email = lecturerEmail,
-                    Role = "Lecturer",
-                    FullName = "Default Lecturer"
-                };
-            }
-
-            // 3. Staff
-            if (email == staffEmail && password == staffPassword)
-            {
-                return new SystemAccount
-                {
-                    Email = staffEmail,
-                    Role = "Staff",
-                    FullName = "Default Staff"
-                };
-            }
-
-            // 4. Nếu không phải user mặc định => kiểm tra DB
+            // Kiểm tra tài khoản Staff/Lecturer/Admin từ database
             var account = _accountRepo.GetByEmail(email);
 
-            if (account == null)
-                return null;
+            if (account == null) return null;
 
-            // So sánh password đơn giản (nên mã hóa thực tế)
+            // So sánh mật khẩu
             if (account.Password != password)
                 return null;
 

@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.DTOs.GetSystemAccountDto
+﻿@model BusinessObjects.DTOs.UpdateSystemAccountDto
 @{
     ViewData["Title"] = "Chỉnh sửa người dùng";
 }
@@ -16,6 +16,11 @@
         <label asp-for="Email">Email</label>
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Email</label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Role">Vai trò</label>
